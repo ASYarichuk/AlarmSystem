@@ -1,50 +1,37 @@
+using System.Collections;
 using UnityEngine;
 
 public class AlarmSystem : MonoBehaviour
 {
     [SerializeField] private AudioSource _alarmSystem;
 
-    private float _maxVolume = 1;
-    private float _currentVolume = 0;
     private float _volumeChangeTime = 1f;
+    private float _targetVolume;
 
-    [SerializeField] private bool isEnabled = false;
-
-    private void Update()
+    public void Play()
     {
-        if (isEnabled)
-        {
-            _alarmSystem.volume = Mathf.MoveTowards(_currentVolume, _maxVolume, _volumeChangeTime * Time.deltaTime);
-
-            if (_currentVolume < _maxVolume)
-            {
-                _currentVolume += _volumeChangeTime * Time.deltaTime;
-            }
-        }
-        else
-        {
-            _alarmSystem.volume = Mathf.MoveTowards(_currentVolume, _maxVolume, _volumeChangeTime * Time.deltaTime);
-
-            if(_currentVolume > 0)
-            {
-                _currentVolume -= _volumeChangeTime * Time.deltaTime;
-            }
-        }
+        _targetVolume = 1f;
+        _alarmSystem.Play();
+        StartCoroutine(ChangeVolume());
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void Stop()
     {
-        if (other.TryGetComponent<StarterAssets.ThirdPersonController>(out StarterAssets.ThirdPersonController player))
+        _targetVolume = 0f;
+        StartCoroutine(ChangeVolume());
+    }
+
+    private void Start()
+    {
+        _alarmSystem.volume = 0;
+    }
+
+    private IEnumerator ChangeVolume()
+    {
+        while (_alarmSystem.volume != _targetVolume)
         {
-            if (isEnabled == false)
-            {
-                isEnabled = true;
-                _alarmSystem.Play();
-            }
-            else
-            {
-                isEnabled = false;
-            }
+            _alarmSystem.volume = Mathf.MoveTowards(_alarmSystem.volume, _targetVolume, _volumeChangeTime * Time.deltaTime);
+            yield return null;
         }
     }
 }
