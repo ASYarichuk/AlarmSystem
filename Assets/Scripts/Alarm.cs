@@ -1,12 +1,17 @@
 using System.Collections;
 using UnityEngine;
 
-public class AlarmSystem : MonoBehaviour
+public class Alarm : MonoBehaviour
 {
     [SerializeField] private AudioSource _alarmSystem;
 
     private float _volumeChangeTime = 1f;
     private float _targetVolume;
+
+    private void Start()
+    {
+        _alarmSystem.volume = 0;
+    }
 
     public void Play()
     {
@@ -19,11 +24,6 @@ public class AlarmSystem : MonoBehaviour
     {
         _targetVolume = 0f;
         StartCoroutine(ChangeVolume());
-    }
-
-    private void Start()
-    {
-        _alarmSystem.volume = 0;
     }
 
     private IEnumerator ChangeVolume()

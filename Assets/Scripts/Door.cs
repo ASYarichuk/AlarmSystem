@@ -1,10 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Door : MonoBehaviour
 {
-    [SerializeField] private AlarmSystem _alarmSystem;
+    [SerializeField] private UnityEvent _entered;
+    [SerializeField] private UnityEvent _cameOut;
 
     private bool isEnabled = false;
 
@@ -15,12 +15,12 @@ public class Door : MonoBehaviour
             if (isEnabled == false)
             {
                 isEnabled = true;
-                _alarmSystem.Play();
+                _entered?.Invoke();
             }
             else
             {
                 isEnabled = false;
-                _alarmSystem.Stop();
+                _cameOut?.Invoke();
             }
         }
     }
