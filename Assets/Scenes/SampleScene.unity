@@ -235,6 +235,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 64000010243441250, guid: ba124179af6a3a7469f127358241673d, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ba124179af6a3a7469f127358241673d, type: 3}
 --- !u!1 &705507993
@@ -428,7 +432,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 0.7915034
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
@@ -538,8 +542,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1619408574}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.15, y: 0.882, z: 2.326}
-  m_LocalScale: {x: 1.6305, y: 3.4521, z: 0.11155}
+  m_LocalPosition: {x: 1.74, y: 0.882, z: -5.22}
+  m_LocalScale: {x: 10.207481, y: 5.47398, z: 15.037155}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}

@@ -7,23 +7,34 @@ public class Alarm : MonoBehaviour
 
     private float _volumeChangeTime = 1f;
     private float _targetVolume;
+    private Coroutine _activeCoroutine;
 
     private void Start()
     {
-        _alarmSystem.volume = 0;
+        _alarmSystem.volume = 0f;
     }
 
     public void Play()
     {
+        if (_activeCoroutine != null)
+        {
+            StopCoroutine(_activeCoroutine);
+        }
+
         _targetVolume = 1f;
         _alarmSystem.Play();
-        StartCoroutine(ChangeVolume());
+        _activeCoroutine = StartCoroutine(ChangeVolume());
     }
 
     public void Stop()
     {
+        if (_activeCoroutine != null)
+        {
+            StopCoroutine(_activeCoroutine);
+        }
+
         _targetVolume = 0f;
-        StartCoroutine(ChangeVolume());
+        _activeCoroutine = StartCoroutine(ChangeVolume());
     }
 
     private IEnumerator ChangeVolume()
